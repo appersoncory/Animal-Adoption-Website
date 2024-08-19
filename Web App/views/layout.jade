@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script.
+      function goBack() {
+        window.history.back();
+      }
+      function clearFilters() {
+        window.location.href = '/animals';
+      }
+  body
+    nav
+      ul
+        li: a(href='/') Home
+        li: a(href='/animals') Animal Listings
+        li: a(href='/search') Search
+        if isAuthenticated
+          li: a(href='/animals/new') Add Animal
+        else
+          li: a(href='/login') Login
+    block content
+    

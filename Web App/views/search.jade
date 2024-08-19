@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  .main-content
+    .search-container
+      .search-box
+        h2 Search Animals
+        form(action="/search/results" method="get")
+          div
+            label(for="species") Species:
+            select(name="species")
+              option(value="" selected=(filters.species === '')) Any
+              option(value="Dog" selected=(filters.species === 'Dog')) Dog
+              option(value="Cat" selected=(filters.species === 'Cat')) Cat
+          div
+            label(for="gender") Gender:
+            select(name="gender")
+              option(value="" selected=(filters.gender === '')) Any
+              option(value="Male" selected=(filters.gender === 'Male')) Male
+              option(value="Female" selected=(filters.gender === 'Female')) Female
+          div
+            label(for="minAge") Min Age:
+            input(type="number" name="minAge" value=filters.minAge)
+          div
+            label(for="maxAge") Max Age:
+            input(type="number" name="maxAge" value=filters.maxAge)
+          div
+            label(for="zip") ZIP Code:
+            input(type="text" name="zip" value=filters.zip)
+          div
+            label(for="maxDistance") Max Distance (miles):
+            input(type="range" name="maxDistance" min="1" max="100" value=filters.maxDistance)
+            span#distanceValue #{filters.maxDistance || 50} miles
+          .actions
+            button(type='submit') Search
+            button(type='button' class='negative-button' onclick='goBack()') Cancel
+
+      script.
+        const rangeInput = document.querySelector('input[name="maxDistance"]');
+        const distanceValueSpan = document.getElementById('distanceValue');
+
+        rangeInput.addEventListener('input', (event) => {
+          distanceValueSpan.textContent = `${event.target.value} miles`;
+        });

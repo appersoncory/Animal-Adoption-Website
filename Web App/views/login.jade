@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .main-content
+    .login-container
+      h2 Employee Login
+      form(action="/login" method="post")
+        div
+          label(for="username") Username:
+          input(type="text" name="username" required)
+        div
+          label(for="password") Password:
+          input(type="password" name="password" required)
+        div.actions
+          button(type="submit") Login
+      if error
+        p.error-message #{error}

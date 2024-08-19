@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  .main-content
+    .search-container
+      .search-box
+        h2 Add a New Animal
+
+        form(action="/animals" method="post" enctype="multipart/form-data")
+          // Display the picture input on the left and the description on the right
+          .form-row
+            .form-column(style="flex: 1; text-align: center;")
+              div
+                label(for="picture") Picture:
+                input(type="file" name="picture" required)
+            .form-column(style="flex: 2;")
+              div
+                label(for="description") Description/Bio:
+                textarea(name="description" rows="8" style="width: 100%;" placeholder="Enter a description or bio..." required)
+
+          .form-row
+            .form-column
+              div
+                label(for="name") Name:
+                input(type="text" name="name" required)
+              div
+                label(for='species') Species:
+                select(name='species' required)
+                  option(value='Dog') Dog
+                  option(value='Cat') Cat
+              div
+                label(for="gender") Gender:
+                select(name="gender" required)
+                  option(value="Male") Male
+                  option(value="Female") Female
+            .form-column
+              div
+                label(for="location") Location/Zipcode:
+                input(type="text" name="location" required)
+              div
+                label(for="age") Age:
+                input(type="number" name="age" min="0" required)
+          .actions
+            button(type="submit") Add Animal
+            button(type="button" class="negative-button" onclick="goBack()") Cancel
+
+    script.
+      function goBack() {
+        window.history.back();

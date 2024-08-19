@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  .main-content
+    .animal-details
+      h1.animal-name= animal.name
+
+      .image-section
+        if animal.picture
+          img(src=animal.picture alt=animal.name class="animal-picture")
+
+      .description-section
+        h2 Description
+        p= animal.description
+
+      .info-section
+        .info-item
+          strong Species:
+          | #{animal.species}
+        .info-item
+          strong Gender:
+          | #{animal.gender}
+        .info-item
+          strong Age:
+          | #{animal.age}
+        .info-item
+          strong Location:
+          | #{animal.location}
+
+      .actions
+        a(href='/adoption_form?animalName=' + animal.name) Adopt
+        button(type='button' class='negative-button' onclick='goBack()') Back To Listings
+        if isAuthenticated
+          form(action='/animals/' + animal.id + '/edit' method='get' style='display:inline;')
+            button(type='submit') Edit
+          form(action='/animals/' + animal.id + '/delete' method='post' style='display:inline;')
+            button(type='submit' class='negative-button') Delete
+
+    script.
+      function goBack() {
+        window.history.back();

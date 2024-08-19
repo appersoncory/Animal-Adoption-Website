@@ -1,0 +1,69 @@
+extends layout
+
+block content
+  .main-content
+    h1 Animal Listings
+    .main-container
+      .grid-container
+        each animal in animals
+          .grid-item
+            if animal.picture
+              img(src=animal.picture alt=animal.name)
+            h2= animal.name
+            .details-container
+              .details-column
+                p Species: #{animal.species}
+                p Age: #{animal.age}
+              .details-column
+                p Gender: #{animal.gender}
+                if animal.distance
+                  p Distance: #{animal.distance}
+                else
+                  p Location: #{animal.location}
+            .actions
+              a(href=`/animals/${animal.id}`) View Details
+              if isAuthenticated
+                form(action='/animals/' + animal.id + '/edit' method='get' style='display:inline;')
+                  button(type='submit') Edit
+                form(action='/animals/' + animal.id + '/delete' method='post' style='display:inline;')
+                  button(type='submit' class='negative-button') Delete
+
+      .filter-sidebar
+        h2 Filters
+        form(action="/animals" method="get")
+          div
+            label(for="species") Species:
+            select(name="species")
+              option(value="" selected=(filters.species === '')) Any
+              option(value="Dog" selected=(filters.species === 'Dog')) Dog
+              option(value="Cat" selected=(filters.species === 'Cat')) Cat
+          div
+            label(for="gender") Gender:
+            select(name="gender")
+              option(value="" selected=(filters.gender === '')) Any
+              option(value="Male" selected=(filters.gender === 'Male')) Male
+              option(value="Female" selected=(filters.gender === 'Female')) Female
+          div
+            label(for="minAge") Min Age:
+            input(type="number" name="minAge" value=filters.minAge)
+          div
+            label(for="maxAge") Max Age:
+            input(type="number" name="maxAge" value=filters.maxAge)
+          div
+            label(for="zip") ZIP Code:
+            input(type="text" name="zip" value=filters.zip)
+          div
+            label(for="maxDistance") Max Distance (miles):
+            input(type="range" name="maxDistance" min="1" max="100" value=filters.maxDistance)
+            span#distanceValue #{filters.maxDistance || 50} miles
+          .actions
+            button(type="submit") Apply Filters
+            button(type="button" class="negative-button" onclick="clearFilters()") Clear Filters
+
+    script.
+      const rangeInput = document.querySelector('input[name="maxDistance"]');
+      const distanceValueSpan = document.getElementById('distanceValue');
+
+      rangeInput.addEventListener('input', (event) => {
+        distanceValueSpan.textContent = `${event.target.value} miles`;
+      });

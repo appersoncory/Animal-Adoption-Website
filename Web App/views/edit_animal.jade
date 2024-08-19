@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  .main-content
+    .search-container
+      .search-box
+        h1 Edit Animal
+
+        form(action=`/animals/${animal.id}` method="post" enctype="multipart/form-data")
+          // Display the picture on the left and the description on the right
+          .form-row
+            .form-column(style="flex: 1; text-align: center;")
+              if animal.picture
+                img(src=animal.picture alt=animal.name width="200")
+                input(type="hidden" name="existingPicture" value=animal.picture)
+            .form-column(style="flex: 2;")
+              div
+                label(for="description") Description/Bio:
+                textarea(name="description" rows="8" style="width: 100%;" required)= animal.description
+
+          .form-row
+            .form-column
+              div
+                label(for="name") Name:
+                input(type="text" name="name" value=animal.name required)
+              div
+                label(for='species') Species:
+                select(name='species' required)
+                  option(value='Dog' selected=(animal.species === 'Dog')) Dog
+                  option(value='Cat' selected=(animal.species === 'Cat')) Cat
+              div
+                label(for="gender") Gender:
+                input(type="text" name="gender" value=animal.gender required)
+              div
+                label(for="age") Age:
+                input(type="number" name="age" value=animal.age required)
+            .form-column
+              div
+                label(for="picture") Update Picture:
+                input(type="file" name="picture")
+              div
+                label(for="location") Location/Zipcode:
+                input(type="text" name="location" value=animal.location required)
+                
+          .actions
+            button(type="submit") Update Animal
+            button(type="button" class="negative-button" onclick="goBack()") Cancel
+
+    script.
+      function goBack() {
+        window.history.back();

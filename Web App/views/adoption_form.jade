@@ -1,0 +1,68 @@
+extends layout
+
+block content
+  .main-content
+    .search-container
+      .search-box
+        h1 Show Interest
+        form(action="/adoption_form" method="post")
+          .form-row
+            div.form-label-column
+              label(for="animalName") Animal Name:
+            div.form-input-column
+              if animalName
+                input(type="text" name="animalName" value=animalName readonly)
+              else
+                input(type="text" name="animalName" required)
+
+          .form-row
+            div.form-label-column
+              label(for="name") Your Name:
+            div.form-input-column
+              input(type="text" name="name" required)
+
+          .form-row
+            div.form-label-column
+              label(for="email") Your Email:
+            div.form-input-column
+              input(type="email" name="email" required)
+
+          .form-row
+            div.form-label-column
+              label(for="phone") Your Phone Number:
+            div.form-input-column
+              input(type="tel" name="phone" required)
+
+          .form-row
+            div.form-label-column
+              label(for="pets") Do you have other pets?:
+            div.form-input-column
+              select(name="pets" required)
+                option(value="Yes") Yes
+                option(value="No") No
+
+          .form-row
+            div.form-label-column
+              label(for="children") Do you have children?:
+            div.form-input-column
+              select(name="children" required)
+                option(value="Yes") Yes
+                option(value="No") No
+
+          .form-row
+            .form-label-column
+            .form-input-column
+              .actions
+                button(type='submit') Submit Application
+                button(type='button' class='negative-button' onclick='goBack()') Cancel
+
+    script.
+      function goBack() {
+        window.history.back();
+      }
+
+      // Show success popup if the form was successfully submitted
+      if (#{showSuccessPopup}) {
+        alert('Your adoption application has been submitted successfully.');
+        window.location.href = '/';
+      }
