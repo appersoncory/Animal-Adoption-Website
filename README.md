@@ -5,7 +5,8 @@
 
 ## Overview
 
-This project is a web-based application designed for an animal rescue organization. The platform allows users to view available animals, search for specific types of animals, and apply for adoption. The platform is built using Node.js, Express, PostgreSQL, and Jade (Pug) as the templating engine. It also includes microservices for CRUD operations and email notifications.
+This project is a web-based application designed for an animal rescue organization. The platform allows users to view available animals, search for specific types of animals, and apply for adoption. The platform is built using Node.js, Express, PostgreSQL, and Jade (Pug) as the templating engine. 
+It uses microservices for CRUD operations, email notifications, user login and authentication, and distance calculations.
 
 ## Features
 
