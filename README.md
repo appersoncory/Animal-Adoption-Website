@@ -13,6 +13,7 @@ It uses microservices for CRUD operations, email notifications, user login and a
 - **View Animals:** Browse a list of animals available for adoption.
 - **Search Animals:** Filter animals by species, gender, age, and location.
 - **Animal Details:** View detailed information about each animal, including pictures, descriptions, and location.
+![Screenshot 2024-08-19 114111](https://github.com/user-attachments/assets/7bf64b61-4f3e-4bbf-a790-53f1b62af747)
 - **Adoption Application:** Apply to adopt an animal by filling out a form with personal details.
 - **Employee Authentication:** Employees can log in to manage the animals, including adding, editing, and deleting animals.
 - **Microservices:** 
